@@ -30,5 +30,14 @@ route.post("/delete", (req, res) => {
         }
     })
 })
+route.post("/edit", (req, res) => {
+    connection.query(`UPDATE list SET tarefa = ${req.body.tarefa} WHERE list.id = ${req.body.id}`, (err) => {
+        if(err) {
+            console.log(err)
+        } else {
+            res.send("edited")
+        }
+    })
+})
 
 module.exports = route

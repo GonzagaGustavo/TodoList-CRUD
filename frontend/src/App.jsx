@@ -5,6 +5,7 @@ import "./App.css";
 function App() {
   const [tarefas, setTarefas] = useState([]);
   const [input, setInput] = useState("");
+  const [editing, setEditing] = useState(undefined);
 
   useEffect(() => {
     axios.get("/get").then((res) => {
@@ -14,23 +15,38 @@ function App() {
   }, []);
 
   function create() {
-    if(input === "") {
-      alert("Escreva uma tarefa!")
+    if (input === "") {
+      alert("Escreva uma tarefa!");
     } else {
-      axios.post("/create", { tarefa: input, checked: 0 }).then((res) => {
-      alert(res.data);
-      window.location.reload();
-    });
+      if (editing) {
+        axios.post("/edit", { id: editing, tarefa: input}).then(res => {
+          window.location.reload()
+        }).then(err => {
+          console.log(err);
+        })
+      } else {
+        axios.post("/create", { tarefa: input, checked: 0 }).then((res) => {
+          alert(res.data);
+          window.location.reload();
+        });
+      }
     }
-}
-function delet(id) {
-  axios.post("/delete", { id: id }).then(res => {
-    alert(res.data)
-    window.location.reload()
-  }).then(err => {
-    console.log(err)
-  })
-}
+  }
+  function delet(id) {
+    axios
+      .post("/delete", { id: id })
+      .then((res) => {
+        alert(res.data);
+        window.location.reload();
+      })
+      .then((err) => {
+        console.log(err);
+      });
+  }
+  function edit(tarefa) {
+    setInput(tarefa.tarefa);
+    setEditing(tarefa.id);
+  }
 
   return (
     <div className="App">
@@ -42,7 +58,9 @@ function delet(id) {
           onChange={(e) => setInput(e.target.value)}
           className="iptC"
         />
-        <button onClick={create} className="criar">Criar</button>
+        <button onClick={create} className="criar">
+          {editing ? <span>Editar</span> : <span>Criar</span>}
+        </button>
       </div>
       <div>
         {tarefas.length === 0 ? (
@@ -51,9 +69,10 @@ function delet(id) {
           <div>
             {tarefas.map((tarefa) => (
               <>
-              <input type="checkbox" />
-              <p>{tarefa.tarefa}</p>
-              <button onClick={() => delet(tarefa.id)}>X</button>
+                <input type="checkbox" />
+                <p>{tarefa.tarefa}</p>
+                <button onClick={() => delet(tarefa.id)}>X</button>
+                <button onClick={() => edit(tarefa)}>E</button>
               </>
             ))}
           </div>
