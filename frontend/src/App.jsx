@@ -8,7 +8,7 @@ function App() {
   const [editing, setEditing] = useState(undefined);
 
   useEffect(() => {
-    axios.get("/get").then((res) => {
+    axios.get("/gete").then((res) => {
       setTarefas(res.data);
       console.log(res.data);
     });

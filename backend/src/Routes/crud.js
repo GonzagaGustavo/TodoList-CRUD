@@ -11,7 +11,7 @@ route.post('/create', (req, res) => {
         }
     })
 })
-route.get("/get", (req, res) => {
+route.get("/gete", (req, res) => {
     connection.query("SELECT * FROM list", (err, results) => {
         if(err) {
             console.log(err)
