@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 
@@ -63,8 +63,7 @@ function App() {
         </button>
       </div>
       <div>
-        <p>teste</p>
-        {/* {tarefas.length === 0 ? (
+        {tarefas.length === 0 ? (
           <div>Sem Tarefas</div>
         ) : (
           <div>
@@ -77,7 +76,7 @@ function App() {
               </div>
             ))}
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );
