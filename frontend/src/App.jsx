@@ -63,7 +63,8 @@ function App() {
         </button>
       </div>
       <div>
-        {tarefas.length === 0 ? (
+        <p>teste</p>
+        {/* {tarefas.length === 0 ? (
           <div>Sem Tarefas</div>
         ) : (
           <div>
@@ -76,7 +77,7 @@ function App() {
               </div>
             ))}
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
