@@ -68,12 +68,12 @@ function App() {
         ) : (
           <div>
             {tarefas.map((tarefa) => (
-              <>
+              <div key={tarefa.id}>
                 <input type="checkbox" />
                 <p>{tarefa.tarefa}</p>
                 <button onClick={() => delet(tarefa.id)}>X</button>
                 <button onClick={() => edit(tarefa)}>E</button>
-              </>
+              </div>
             ))}
           </div>
         )}
