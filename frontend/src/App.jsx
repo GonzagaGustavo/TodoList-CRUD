@@ -3,13 +3,12 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [tarefas, setTarefas] = useState([]);
+  const [tarefas, setTarefas] = useState([{id: 3, tarefa: "bru"}]);
   const [input, setInput] = useState("");
   const [editing, setEditing] = useState(undefined);
 
   useEffect(() => {
     axios.get("/get").then((res) => {
-      setTarefas(res.data);
       console.log(res.data);
     });
   }, []);
